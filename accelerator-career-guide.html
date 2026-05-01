@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Breaking Into Accelerators — SF Career Guide</title>
+  <style>
+    :root {
+      --bg: #0d0f14;
+      --surface: #161921;
+      --surface2: #1e2230;
+      --border: #2a2f3e;
+      --accent: #6c63ff;
+      --accent2: #00d4aa;
+      --accent3: #ff6b6b;
+      --accent4: #ffa94d;
+      --text: #e8eaf0;
+      --muted: #8b92a8;
+      --tag-bg: #1e2230;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0d0f14 0%, #1a1040 50%, #0d1a1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 72px 40px 60px;
+      text-align: center;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: rgba(108, 99, 255, 0.15);
+      border: 1px solid rgba(108, 99, 255, 0.4);
+      color: #a09eff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      background: linear-gradient(120deg, #e8eaf0 30%, #a09eff 70%, #00d4aa 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    /* ── NAV ── */
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 15, 20, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      overflow-x: auto;
+    }
+
+    .sticky-nav ul {
+      display: flex;
+      list-style: none;
+      gap: 0;
+      white-space: nowrap;
+    }
+
+    .sticky-nav a {
+      display: block;
+      padding: 16px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .sticky-nav a:hover {
+      color: var(--text);
+      border-bottom-color: var(--accent);
+    }
+
+    /* ── LAYOUT ── */
+    .page { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    .section { padding-top: 64px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .section-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+    }
+
+    .section-header p {
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover { border-color: #3a4058; }
+
+    .card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card ul { padding-left: 18px; margin-top: 8px; }
+    .card ul li { margin-bottom: 4px; }
+
+    /* ── PLAYER GRID ── */
+    .player-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .player-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .player-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .player-card .tier {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .tier-elite { background: rgba(108,99,255,0.15); color: #a09eff; }
+    .tier-top   { background: rgba(0,212,170,0.12); color: #00d4aa; }
+    .tier-niche { background: rgba(255,107,107,0.12); color: #ff8f8f; }
+
+    .player-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .player-card .desc { font-size: 13px; color: var(--muted); margin-bottom: 10px; line-height: 1.5; }
+
+    .player-card .meta {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+
+    .tag {
+      font-size: 11px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .player-card a {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .player-card a:hover { text-decoration: underline; }
+
+    /* ── ROLES ── */
+    .roles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .role-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s;
+    }
+
+    .role-card:hover { border-color: var(--accent2); }
+
+    .role-icon { font-size: 28px; margin-bottom: 10px; }
+    .role-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+
+    .role-card .salary {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent2);
+      margin-bottom: 10px;
+    }
+
+    .role-card p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .role-card ul {
+      padding-left: 16px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .role-card li { margin-bottom: 4px; }
+
+    /* ── PATHWAY ── */
+    .pathway {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+      padding-left: 32px;
+    }
+
+    .pathway::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2));
+      border-radius: 2px;
+    }
+
+    .step {
+      position: relative;
+      padding: 16px 0 24px;
+    }
+
+    .step::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 20px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    .step:last-child::before { background: var(--accent2); }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .step h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    @media (max-width: 640px) {
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s;
+    }
+
+    .project-card:hover { border-color: #3a4058; }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+
+    .project-card.p1::before { background: linear-gradient(90deg, #6c63ff, #a09eff); }
+    .project-card.p2::before { background: linear-gradient(90deg, #00d4aa, #00a882); }
+    .project-card.p3::before { background: linear-gradient(90deg, #ffa94d, #ff8f00); }
+    .project-card.p4::before { background: linear-gradient(90deg, #ff6b6b, #d63031); }
+    .project-card.p5::before { background: linear-gradient(90deg, #74b9ff, #0984e3); }
+    .project-card.p6::before { background: linear-gradient(90deg, #fd79a8, #e84393); }
+    .project-card.p7::before { background: linear-gradient(90deg, #55efc4, #00b894); }
+
+    .project-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .project-num {
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      background: var(--surface2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .project-card h3 {
+      font-size: 16px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+
+    .p-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .project-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .psection {
+      background: var(--surface2);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .psection-label {
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+    }
+
+    .psection-label.lbl-why   { color: #a09eff; }
+    .psection-label.lbl-what  { color: #00d4aa; }
+    .psection-label.lbl-build { color: #ffa94d; }
+
+    .psection p {
+      font-size: 12.5px;
+      color: #9ba3bb;
+      line-height: 1.6;
+    }
+
+    .psection ul {
+      padding-left: 14px;
+      font-size: 12.5px;
+      color: #9ba3bb;
+    }
+
+    .psection li { margin-bottom: 3px; }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .tech-tag {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(255,169,77,0.1);
+      border: 1px solid rgba(255,169,77,0.25);
+      color: #ffa94d;
+    }
+
+    /* ── RESOURCES TABLE ── */
+    .resource-section {
+      margin-bottom: 32px;
+    }
+
+    .resource-section h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    .resource-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .resource-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+
+    .resource-item:hover { border-color: var(--accent); }
+
+    .resource-item .icon { font-size: 18px; flex-shrink: 0; }
+
+    .resource-item .info .title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .resource-item .info .sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .resource-item .arrow {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: rgba(108, 99, 255, 0.07);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+
+    .callout p {
+      font-size: 14px;
+      color: #b0b4cc;
+      line-height: 1.7;
+    }
+
+    .callout strong { color: #d0d4ee; }
+
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0 0;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 12px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .hero { padding: 48px 20px 40px; }
+      .sticky-nav { padding: 0 16px; }
+      .page { padding: 0 16px 60px; }
+      .player-grid { grid-template-columns: 1fr; }
+      .roles-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="badge">Career Guide — 2025 Edition</div>
+    <h1>Breaking Into<br/>SF Accelerators</h1>
+    <p>Everything you need to understand the industry, find the right role, and build a portfolio that gets you noticed — before you ever get your first job.</p>
+  </div>
+
+  <!-- NAV -->
+  <nav class="sticky-nav">
+    <ul>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#players">Major Players</a></li>
+      <li><a href="#roles">Roles</a></li>
+      <li><a href="#pathway">How to Break In</a></li>
+      <li><a href="#projects">Projects to Build</a></li>
+      <li><a href="#resources">Resources</a></li>
+    </ul>
+  </nav>
+
+  <div class="page">
+
+    <!-- ── SECTION 1: HOW IT WORKS ── -->
+    <section class="section" id="how-it-works">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(108,99,255,0.12);">🏗️</div>
+        <div>
+          <h2>How This Industry Works</h2>
+          <p>The machine that produces Airbnb, Stripe, and Coinbase</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>The simplest mental model: an accelerator is a <strong>production line for startups</strong>. Founders come in with an idea. They leave with a product, early customers, investor relationships, and a pitch. The accelerator makes money by owning a small slice of every company it puts through — and betting that one of them becomes worth billions.</p>
+      </div>
+
+      <div class="card">
+        <h3>The Basic Model</h3>
+        <p>Accelerators take roughly <strong>5–10% equity</strong> in each startup in exchange for:</p>
+        <ul>
+          <li>A cash investment ($120k–$1M depending on the program)</li>
+          <li>3–6 months of structured programming (workshops, mentors, office hours)</li>
+          <li>Access to their investor network</li>
+          <li>A Demo Day — a high-profile event where startups pitch to hundreds of VCs</li>
+        </ul>
+        <br/>
+        <p>The business model only works if at least one company in every cohort becomes massively valuable. Y Combinator's entire return is driven by ~5 companies out of 5,000+ funded (Airbnb, Stripe, Coinbase, DoorDash, Dropbox).</p>
+      </div>
+
+      <div class="card">
+        <h3>Accelerators vs. Incubators — What's the Difference?</h3>
+        <ul>
+          <li><strong>Accelerators</strong> — Time-limited (3–6 months), cohort-based, take equity, end with Demo Day. Fast-paced. Think Y Combinator.</li>
+          <li><strong>Incubators</strong> — Longer timeline, often tied to universities or corporations, sometimes free. More about nurturing an idea than sprinting to fundraise. Think a university innovation lab.</li>
+          <li><strong>VC with accelerator arms</strong> — Firms like a16z and Sequoia run their own accelerator programs (Speedrun, Arc) to find companies earlier and at lower valuations.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>How a Program Actually Runs (inside a 3-month cohort)</h3>
+        <ul>
+          <li><strong>Week 1–2:</strong> Onboarding, goal-setting, introductions to mentors and partners</li>
+          <li><strong>Week 3–8:</strong> Weekly programming — workshops on product, growth, fundraising, legal, hiring. Startup founders move fast; the program keeps pushing them.</li>
+          <li><strong>Week 9–10:</strong> Investor introductions, partner meetings, corporate pilot discussions</li>
+          <li><strong>Week 11–12:</strong> Demo Day prep — rehearsals, pitch coaching, press outreach</li>
+          <li><strong>Demo Day:</strong> Founders pitch to 300–1,000 investors. Best day of the accelerator calendar.</li>
+          <li><strong>Post-program:</strong> Alumni support, follow-on funding help, partnerships introductions</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Who Are the Key People Inside an Accelerator?</h3>
+        <ul>
+          <li><strong>Partners / Managing Director</strong> — The top of the house. Veteran investors who set strategy, pick companies, and write the checks.</li>
+          <li><strong>Program Managers</strong> — Run the day-to-day operations of each cohort. The backbone of the whole operation.</li>
+          <li><strong>Partnerships Team</strong> — Build and manage relationships with corporations, sponsors, investors, and service providers who want access to the startup portfolio.</li>
+          <li><strong>Scouts</strong> — Find the next great company before anyone else does. Often former founders or deeply networked operators.</li>
+          <li><strong>Operations</strong> — Events, logistics, finances, community management.</li>
+        </ul>
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- ── SECTION 2: MAJOR PLAYERS ── -->
+    <section class="section" id="players">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(0,212,170,0.1);">🗺️</div>
+        <div>
+          <h2>Major Players in SF & Silicon Valley</h2>
+          <p>The organizations worth knowing — and eventually working for</p>
+        </div>
+      </div>
+
+      <p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">These are the names that come up in every conversation. Know them cold before any interview.</p>
+
+      <div class="player-grid">
+
+        <div class="player-card">
+          <div class="tier tier-elite">Elite</div>
+          <h3>Y Combinator</h3>
+          <p class="desc">The gold standard. Has funded more unicorns than any other program on earth. Extremely selective (&lt;2% acceptance). Every serious person in this world has an opinion on YC.</p>
+          <div class="meta">
+            <span class="tag">~125 startups/batch</span>
+            <span class="tag">$500k investment</span>
+            <span class="tag">All sectors</span>
+          </div>
+          <a href="https://ycombinator.com" target="_blank">ycombinator.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-elite">Elite</div>
+          <h3>Andreessen Horowitz (a16z)</h3>
+          <p class="desc">One of the most powerful VC firms on earth. Their Speedrun accelerator accepts &lt;0.4% of applicants. Huge platform team (partnerships, recruiting, press) — one of the best places to work in the industry.</p>
+          <div class="meta">
+            <span class="tag">Speedrun: ~60/batch</span>
+            <span class="tag">Up to $1M</span>
+            <span class="tag">AI, crypto, bio</span>
+          </div>
+          <a href="https://a16z.com" target="_blank">a16z.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-elite">Elite</div>
+          <h3>Sequoia Arc</h3>
+          <p class="desc">Sequoia Capital's accelerator arm. Very small cohorts (~15 companies), highly exclusive, deep-pocketed. If you want to work at the intersection of VC and acceleration, this is pinnacle territory.</p>
+          <div class="meta">
+            <span class="tag">~15 startups/cohort</span>
+            <span class="tag">$1M investment</span>
+            <span class="tag">Seed stage</span>
+          </div>
+          <a href="https://sequoiacap.com" target="_blank">sequoiacap.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-top">Top Tier</div>
+          <h3>500 Global</h3>
+          <p class="desc">One of the most active early-stage funds globally. Strong curriculum focus. Their SF-based flagship program is a great entry point for partnerships and program roles — bigger team, more structured hiring than boutique accelerators.</p>
+          <div class="meta">
+            <span class="tag">Pre-seed / seed</span>
+            <span class="tag">$150k for 6%</span>
+            <span class="tag">Global reach</span>
+          </div>
+          <a href="https://500.co" target="_blank">500.co ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-top">Top Tier</div>
+          <h3>Plug and Play Tech Center</h3>
+          <p class="desc">Massive corporate innovation platform headquartered in Sunnyvale. Runs 30+ vertical-specific programs. Heavy corporate partnerships model — their partnerships team is one of the largest in the space. Great place to break in.</p>
+          <div class="meta">
+            <span class="tag">112+ startups/batch</span>
+            <span class="tag">30+ verticals</span>
+            <span class="tag">Corporate-backed</span>
+          </div>
+          <a href="https://plugandplaytechcenter.com" target="_blank">plugandplaytechcenter.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-top">Top Tier</div>
+          <h3>Techstars SF</h3>
+          <p class="desc">Global brand, SF chapter focuses on Deep Tech and AI. Well-known for structured programming and mentor networks. A step below YC prestige but still a great credential. More accessible for first-time hires.</p>
+          <div class="meta">
+            <span class="tag">Pre-seed / seed</span>
+            <span class="tag">$120k</span>
+            <span class="tag">Deep Tech, AI, SaaS</span>
+          </div>
+          <a href="https://techstars.com" target="_blank">techstars.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-top">Top Tier</div>
+          <h3>South Park Commons</h3>
+          <p class="desc">Less of a traditional accelerator, more of a prestige community for pre-company builders in SF. Well-networked, highly curated, up to $1M. Worth understanding as a community hub where industry people gather.</p>
+          <div class="meta">
+            <span class="tag">Community model</span>
+            <span class="tag">Up to $1M</span>
+            <span class="tag">Founders + operators</span>
+          </div>
+          <a href="https://southparkcommons.com" target="_blank">southparkcommons.com ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-niche">Specialist</div>
+          <h3>HAX (SOSV)</h3>
+          <p class="desc">Deep tech and hardware accelerator. Unusual and well-respected. If she has interest in climate, robotics, or biotech — this is a name to know. SOSV (parent firm) is one of the most prolific early-stage funds globally.</p>
+          <div class="meta">
+            <span class="tag">Hard tech</span>
+            <span class="tag">$250–500k</span>
+            <span class="tag">Climate, robotics</span>
+          </div>
+          <a href="https://hax.co" target="_blank">hax.co ↗</a>
+        </div>
+
+        <div class="player-card">
+          <div class="tier tier-niche">Specialist</div>
+          <h3>AngelPad</h3>
+          <p class="desc">Tiny, elite, mentorship-first program. Only 12–15 startups per batch with &lt;1% acceptance. Boutique feel — strong alumni network. Consistently ranked among the top accelerators despite its small size.</p>
+          <div class="meta">
+            <span class="tag">~12 startups/batch</span>
+            <span class="tag">SaaS, marketplaces</span>
+            <span class="tag">SF + NYC</span>
+          </div>
+          <a href="https://angelpad.com" target="_blank">angelpad.com ↗</a>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- ── SECTION 3: ROLES ── -->
+    <section class="section" id="roles">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(255,165,77,0.12);">💼</div>
+        <div>
+          <h2>Roles Inside Accelerators</h2>
+          <p>What the jobs actually look like — and what pays what</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>Key insight:</strong> Accelerator teams are small — typically 10–30 people running programs for 50–250 startups. Every hire carries real weight. They're not looking for someone who just wants to be near startups. They want people who can <em>genuinely help founders</em> — through connections, knowledge, or execution.</p>
+      </div>
+
+      <div class="roles-grid">
+
+        <div class="role-card">
+          <div class="role-icon">🤝</div>
+          <h3>Partnerships Manager</h3>
+          <div class="salary">$95k–$150k | Most relevant role</div>
+          <p>This is the person who manages the accelerator's external relationships — corporate sponsors, investors, service providers, event partners. Think of it as business development for the accelerator itself.</p>
+          <ul>
+            <li>Build and maintain relationships with corporate partners (banks, large tech companies, etc.)</li>
+            <li>Match portfolio startups with partners who can be their first customers</li>
+            <li>Negotiate sponsorship and co-marketing deals</li>
+            <li>Represent the accelerator at conferences and events</li>
+            <li>Track and report on partnership outcomes</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon">📋</div>
+          <h3>Program Manager</h3>
+          <div class="salary">$79k–$120k | Easiest entry point</div>
+          <p>The operational backbone. Runs the cohort from application to Demo Day. Lots of logistics, communication, and founder-facing time. A great first role because it gives you exposure to everything.</p>
+          <ul>
+            <li>Manage the full 3-month programming calendar</li>
+            <li>Coordinate mentors, speakers, and workshops</li>
+            <li>Track startup progress and flag issues early</li>
+            <li>Run Demo Day logistics end-to-end</li>
+            <li>Keep 30+ founders organized and on track</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon">🔍</div>
+          <h3>Scout / Deal Sourcer</h3>
+          <div class="salary">$70k–$130k | Often part-time first</div>
+          <p>Scouts find great startups before anyone else does. It's part detective work, part networking, part instinct. Many scouts start part-time while doing something else, building their dealflow credibility.</p>
+          <ul>
+            <li>Identify and evaluate promising early-stage startups</li>
+            <li>Attend events, hackathons, university programs</li>
+            <li>Build relationships with founders before they're fundable</li>
+            <li>Write up investment memos recommending or passing</li>
+            <li>Maintain a pipeline of high-quality leads</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon">⚙️</div>
+          <h3>Operations Associate</h3>
+          <div class="salary">$65k–$95k | Great first role</div>
+          <p>Handles the logistics that make programs run. Events, finances, communications, CRM management. Unglamorous but extremely valuable — and it puts you in the room with founders, investors, and partners every day.</p>
+          <ul>
+            <li>Plan and execute all program events</li>
+            <li>Manage the application and selection process</li>
+            <li>Maintain founder and partner databases</li>
+            <li>Handle onboarding for each new cohort</li>
+            <li>Communicate daily with program participants</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon">📊</div>
+          <h3>Platform / Community Role</h3>
+          <div class="salary">$80k–$130k | Growing category</div>
+          <p>Relatively new role — especially at VC firms like a16z that have large "platform" teams. Focuses on providing non-financial value to portfolio: recruiting help, press introductions, customer connections, community events.</p>
+          <ul>
+            <li>Connect portfolio companies to talent, press, and customers</li>
+            <li>Run community programs and networking events</li>
+            <li>Maintain alumni networks and mentorship programs</li>
+            <li>Build and manage startup resource libraries</li>
+          </ul>
+        </div>
+
+        <div class="role-card">
+          <div class="role-icon">📝</div>
+          <h3>Analyst / Investment Intern</h3>
+          <div class="salary">$50k–$80k | Stepping stone</div>
+          <p>Usually attached to the investment side. Evaluates applications, writes memos, does market research. More likely at VC firms with accelerator arms than at standalone accelerators. Often a path to becoming a junior investor.</p>
+          <ul>
+            <li>Review and score startup applications</li>
+            <li>Write market landscape research</li>
+            <li>Build competitive analyses for investment decisions</li>
+            <li>Support partners in due diligence</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- ── SECTION 4: PATHWAY ── -->
+    <section class="section" id="pathway">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(255,107,107,0.12);">🚀</div>
+        <div>
+          <h2>How to Actually Break In</h2>
+          <p>The honest path — not the sanitized LinkedIn version</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p><strong>The hard truth:</strong> Most accelerator roles are filled through referrals and warm introductions. Job postings exist, but the best roles go to people already in the network. Your goal is to be known before a role opens up — not to apply cold when it does.</p>
+      </div>
+
+      <div class="pathway">
+
+        <div class="step">
+          <div class="step-num">Step 1</div>
+          <h3>Get fluent in the language</h3>
+          <p>Before any conversation: know who's in every major accelerator's portfolio, what the current hot sectors are (AI agents, climate, healthcare AI), and what the big debates in VC are (valuation reset, AI bubble, founder-friendly terms). Read First Round Review, NFX, and a16z weekly. This takes 3–4 weeks. Then you can hold a real conversation.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">Step 2</div>
+          <h3>Show up where the industry is</h3>
+          <p>Attend Demo Days (many are public — YC, Techstars, 500 Global all have open Demo Days), TechCrunch Disrupt, SF Tech Week, and Startup Grind events. Not to network aggressively — but to become a familiar face. The startup world is smaller than it looks. Being at the right events twice puts you in more conversations than 50 cold emails.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">Step 3</div>
+          <h3>Build a public signal</h3>
+          <p>Publish something people in this world would read. A breakdown of Y Combinator's recent batch. An analysis of which startup sectors are getting accelerator attention. A tool that helps founders (see the projects section below). People in this world are on LinkedIn and Twitter/X — one piece of genuinely useful content gets forwarded and noticed. Your projects are your portfolio.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">Step 4</div>
+          <h3>Target the right doors first</h3>
+          <p>Don't start with YC or a16z. Those roles go to people with 5+ years in the ecosystem already. Start with: <strong>Plug and Play</strong> (large team, actively hires), <strong>Techstars SF</strong> (structured hiring, values operators), <strong>500 Global</strong> (program-heavy, needs program managers), and corporate innovation arms of big companies (Google for Startups, Microsoft for Startups, Salesforce Ventures). These are real doors into the industry.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">Step 5</div>
+          <h3>Lead with what you can do, not what you want</h3>
+          <p>When reaching out or interviewing, don't say "I want to learn about startups." Say "I've been tracking 20 startups in the AI infrastructure space, here's what I found, and here's a rough tool I built that could help your scouting." That's the difference between a hopeful candidate and someone they'll make room for. An MBA plus one genuinely useful project beats an MBA alone every time.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-num">Step 6 — Final Boss</div>
+          <h3>Get a warm intro through your MBA network</h3>
+          <p>The most underutilized asset is the MBA alumni network. Someone in her program has already worked at one of these organizations. One warm email to that person asking for a 20-minute call is worth more than 100 cold applications. Business school exists precisely to convert cold outreach into warm introductions — she should use it aggressively.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- ── SECTION 5: PROJECTS ── -->
+    <section class="section" id="projects">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(116,185,255,0.12);">🛠️</div>
+        <div>
+          <h2>Projects to Build with Claude Code</h2>
+          <p>Real unsolved problems in the industry — not textbook exercises</p>
+        </div>
+      </div>
+
+      <div class="callout">
+        <p>Each of these addresses a <strong>documented, current pain point</strong> inside accelerators and VC firms — not generic ideas. Build any one of these, publish it on GitHub, write a short LinkedIn post explaining why you built it, and you'll have more credibility than most people applying for the same roles. No coding experience needed — Claude Code does the building. Your job is the thinking.</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT 1 -->
+        <div class="project-card p1">
+          <div class="project-header">
+            <div class="project-num">01</div>
+            <h3>AI Moat Detector for Startup Applications</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Scout / Analyst Role</span>
+            <span class="p-tag">High Impact</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>52% of YC's W25 applications were AI companies. Scouts are drowning — and the tools they have can't tell a real AI startup from a wrapper around GPT-4 with a landing page. The pattern-matching that works for traditional startups (team pedigree, revenue traction) breaks when every app says "proprietary training data." No one has built a tool that specifically evaluates AI defensibility.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Takes a startup's website, pitch deck, or application text as input</li>
+                <li>Scores it on 5 AI moat dimensions: data advantage, model differentiation, switching costs, network effects, regulatory/distribution moats</li>
+                <li>Returns a moat scorecard with reasoning and red flags</li>
+                <li>Proves you understand what makes an AI company defensible vs. a feature — the exact question scouts are asking in 2025</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Streamlit (web UI)</span>
+                <span class="tech-tag">PyMuPDF (PDF parsing)</span>
+                <span class="tech-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card p2">
+          <div class="project-header">
+            <div class="project-num">02</div>
+            <h3>Investor Criteria Decoder</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Partnerships Role</span>
+            <span class="p-tag">Founder-Facing</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>VCs almost never publish clear, specific investment criteria — check size, stage, sectors, whether they lead or follow, board involvement style. Founders are forced to guess and guess wrong. The result: both sides waste enormous time on mismatched meetings. No tool currently helps founders self-qualify <em>before</em> reaching out. This gap is well-documented inside VC circles as a structural inefficiency.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Takes an investor's public signals (portfolio, blog posts, Twitter/X, LinkedIn) as input</li>
+                <li>Uses Claude to extract their implicit thesis: stage, geography, sectors, what they won't fund, check behavior</li>
+                <li>Generates a structured "Investor Profile" founders can use to self-qualify before reaching out</li>
+                <li>Proves you understand both sides of the dealflow problem — a rare perspective for someone at the start of their career</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Crunchbase (manual input)</span>
+                <span class="tech-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card p3">
+          <div class="project-header">
+            <div class="project-num">03</div>
+            <h3>Corporate Pilot Readiness Checker</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Partnerships Role</span>
+            <span class="p-tag">Unsolved Problem</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>Accelerators increasingly broker corporate-startup pilots — but most never convert to paid contracts. One practitioner described it bluntly: "There are more people involved in the corporate purchasing process than the startup has employees." The real failure is that startups enter these partnerships before they're ready for enterprise procurement. No one pre-screens for readiness before the intro is made.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Startup fills in a short form (team size, legal entity, insurance, compliance certs, sales cycle experience)</li>
+                <li>Claude evaluates readiness across 6 enterprise dimensions: legal, security, procurement, support, pricing structure, reference customers</li>
+                <li>Returns a readiness score with specific gaps to fix before the corporate meeting</li>
+                <li>Proves you understand why most partnerships fail — the exact problem a partnerships manager deals with daily</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Typeform or Google Forms (input)</span>
+                <span class="tech-tag">Streamlit or Notion</span>
+                <span class="tech-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 4 -->
+        <div class="project-card p4">
+          <div class="project-header">
+            <div class="project-num">04</div>
+            <h3>Founder-Investor Fit Scorer</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Scout Role</span>
+            <span class="p-tag">Research-Backed</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>A Noam Wasserman study found 65%+ of startup failures involve founder-investor conflicts rooted in mismatched expectations set at the start. Tools exist to find investors — none meaningfully match on fit: board involvement style, follow-on behavior, domain depth, or risk tolerance. This mismatch is a well-documented, unresolved problem that costs both founders and investors significant time and money.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Founder answers 10 questions about their working style, fundraising stage, and what they need from an investor</li>
+                <li>Investor profile is built from public signals (portfolio, writing, known reputation)</li>
+                <li>Claude scores fit across 5 dimensions: stage alignment, domain expertise, involvement style, follow-on track record, network relevance</li>
+                <li>Proves you understand that dealflow is a matching problem, not a volume problem — a sophisticated insight for a junior hire</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Streamlit</span>
+                <span class="tech-tag">Google Sheets (investor database)</span>
+                <span class="tech-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 5 -->
+        <div class="project-card p5">
+          <div class="project-header">
+            <div class="project-num">05</div>
+            <h3>Alumni Momentum Tracker</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Program Manager Role</span>
+            <span class="p-tag">Post-Program Gap</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>Most accelerators lose meaningful contact with alumni within 6 months of graduation — right when those companies are hitting their hardest growth challenges. LPs increasingly demand long-term outcome data, warm intros to Series A investors are the most valuable thing an accelerator can offer, and yet there is no structured system for staying close to alumni. This is a documented operational gap across the industry.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Takes a list of alumni companies and monitors their public signals: job postings (= growth), news mentions (= traction), LinkedIn updates (= team changes)</li>
+                <li>Flags companies that are raising, hiring fast, or showing distress signals</li>
+                <li>Generates a weekly digest for the program team: "these 3 alumni need a check-in, these 2 are ready for Series A intros"</li>
+                <li>Proves you think about long-term founder relationships, not just cohort logistics — exactly what sets great program managers apart</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Python (web scraping)</span>
+                <span class="tech-tag">Google Sheets or Airtable</span>
+                <span class="tech-tag">Email digest (SMTP)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 6 -->
+        <div class="project-card p6">
+          <div class="project-header">
+            <div class="project-num">06</div>
+            <h3>LP Report Auto-Generator</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Operations Role</span>
+            <span class="p-tag">Manual Work Eliminator</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>Quarterly LP reporting at most accelerators and micro-funds takes a week of manual work: stitching data from Notion, Airtable, email threads, and Slack into a polished PDF narrative. LPs increasingly want structured metrics (TVPI, DPI, portfolio KPIs) on a monthly cadence — not a prose update. One LP stated plainly: "We can't rely on gut feel or nice branding anymore." No lightweight tool solves this for small funds.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Takes a simple portfolio spreadsheet (company, stage, last valuation, key metric, status) as input</li>
+                <li>Claude writes a polished LP update: portfolio highlights, companies to watch, risks, and a cohort summary narrative</li>
+                <li>Exports a clean PDF or Notion page ready to send — no formatting required</li>
+                <li>Proves you understand the operations side of fund management, not just the exciting startup-facing side</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Google Sheets API</span>
+                <span class="tech-tag">ReportLab or WeasyPrint (PDF)</span>
+                <span class="tech-tag">Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PROJECT 7 -->
+        <div class="project-card p7">
+          <div class="project-header">
+            <div class="project-num">07</div>
+            <h3>Startup Signal Aggregator</h3>
+          </div>
+          <div class="project-tags">
+            <span class="p-tag">Scout Role</span>
+            <span class="p-tag">Replaces Manual Research</span>
+          </div>
+          <div class="project-sections">
+            <div class="psection">
+              <div class="psection-label lbl-why">Why It Matters</div>
+              <p>Professional scouts manually check ProductHunt, Hacker News Show HN, GitHub trending, and LinkedIn every week to find companies before they raise. Tools like Harmonic and Tracxn surface volume but "don't go deep enough to give you conviction," as one CVC practitioner put it. The gap: a lightweight aggregator that surfaces early signals across multiple channels and gives you a reason to care, not just a company name.</p>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-what">What It Does & Proves</div>
+              <ul>
+                <li>Scrapes ProductHunt launches, HN Show HN posts, and GitHub trending weekly</li>
+                <li>Filters by configurable thesis (e.g., "B2B SaaS, AI infrastructure, pre-seed signals")</li>
+                <li>Claude writes a 3-sentence "why you should care" for each matching company</li>
+                <li>Sends a weekly briefing — mimicking exactly what a scout sends to their partners every Monday</li>
+                <li>Proves you can build a systematic sourcing process, not just wait for inbound</li>
+              </ul>
+            </div>
+            <div class="psection">
+              <div class="psection-label lbl-build">How to Build</div>
+              <div class="tech-tags">
+                <span class="tech-tag">Claude API</span>
+                <span class="tech-tag">Python (requests + BeautifulSoup)</span>
+                <span class="tech-tag">ProductHunt API</span>
+                <span class="tech-tag">Email digest or Slack webhook</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /projects-grid -->
+
+    </section>
+
+    <hr class="divider"/>
+
+    <!-- ── SECTION 6: RESOURCES ── -->
+    <section class="section" id="resources">
+      <div class="section-header">
+        <div class="section-icon" style="background: rgba(108,99,255,0.1);">📚</div>
+        <div>
+          <h2>Resources to Bookmark Right Now</h2>
+          <p>The newsletters, communities, and events worth your time</p>
+        </div>
+      </div>
+
+      <div class="resource-section">
+        <h3>Must-Read Newsletters</h3>
+        <div class="resource-list">
+          <a class="resource-item" href="https://review.firstround.com" target="_blank">
+            <span class="icon">📰</span>
+            <div class="info">
+              <div class="title">First Round Review</div>
+              <div class="sub">The best practitioner content on startups — leadership, fundraising, hiring, growth. 600+ article archive. Read weekly.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://nfx.com" target="_blank">
+            <span class="icon">🔄</span>
+            <div class="info">
+              <div class="title">NFX Newsletter</div>
+              <div class="sub">321k+ founder subscribers. Deep essays on network effects, venture strategy, and pre-seed investing. Very signal-dense.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://techcrunch.com" target="_blank">
+            <span class="icon">⚡</span>
+            <div class="info">
+              <div class="title">TechCrunch</div>
+              <div class="sub">The primary news source for funding announcements, accelerator news, and startup coverage in SF. Read daily.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://a16z.com" target="_blank">
+            <span class="icon">🧠</span>
+            <div class="info">
+              <div class="title">a16z Articles & Podcast</div>
+              <div class="sub">High-quality thinking on tech trends, AI, market dynamics. Great for being conversant with where smart money is looking.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resource-section">
+        <h3>Communities & Events</h3>
+        <div class="resource-list">
+          <a class="resource-item" href="https://startupgrind.com" target="_blank">
+            <span class="icon">🔥</span>
+            <div class="info">
+              <div class="title">Startup Grind Silicon Valley</div>
+              <div class="sub">Monthly events, annual conference. Good for becoming a familiar face in the ecosystem without formal introductions.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://techcrunch.com/events" target="_blank">
+            <span class="icon">🏟️</span>
+            <div class="info">
+              <div class="title">TechCrunch Disrupt (SF, Oct 2026)</div>
+              <div class="sub">The biggest startup conference in SF. 200 early-stage startups pitch. Networking-dense. Worth attending at least once.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://foundersnetwork.com" target="_blank">
+            <span class="icon">🌐</span>
+            <div class="info">
+              <div class="title">Founders Network</div>
+              <div class="sub">Curated community of SF founders since 2011. Events, panels, fundraising roundtables. Good for meeting real founders, not just investors.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://southparkcommons.com" target="_blank">
+            <span class="icon">🏘️</span>
+            <div class="info">
+              <div class="title">South Park Commons</div>
+              <div class="sub">SF's most elite pre-company community. Worth following their events even without a membership.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resource-section">
+        <h3>Tools for Research & Scouting</h3>
+        <div class="resource-list">
+          <a class="resource-item" href="https://harmonic.ai" target="_blank">
+            <span class="icon">🔭</span>
+            <div class="info">
+              <div class="title">Harmonic.ai</div>
+              <div class="sub">AI-powered startup discovery platform. Indexes 30M+ companies. Used by professional scouts. Good to understand and demo.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://signal.nfx.com" target="_blank">
+            <span class="icon">📡</span>
+            <div class="info">
+              <div class="title">Signal by NFX</div>
+              <div class="sub">Free network for investors and founders. Shows warm intro pathways. Useful for understanding how the investor relationship graph works.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://crunchbase.com" target="_blank">
+            <span class="icon">📊</span>
+            <div class="info">
+              <div class="title">Crunchbase</div>
+              <div class="sub">The standard database for funding data. Every person in this industry uses it. Know how to use it cold.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://tracxn.com" target="_blank">
+            <span class="icon">📈</span>
+            <div class="info">
+              <div class="title">Tracxn</div>
+              <div class="sub">Combines AI and human analysts to track 3.7M+ companies. Sector heatmaps, curated lists, deal sourcing workflows.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="resource-section">
+        <h3>Job Boards to Watch</h3>
+        <div class="resource-list">
+          <a class="resource-item" href="https://linkedin.com/jobs" target="_blank">
+            <span class="icon">💼</span>
+            <div class="info">
+              <div class="title">LinkedIn Jobs</div>
+              <div class="sub">Primary channel for accelerator and VC firm postings. Set alerts for "Program Manager", "Partnerships", "Accelerator" + San Francisco.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://angel.co/jobs" target="_blank">
+            <span class="icon">👼</span>
+            <div class="info">
+              <div class="title">Wellfound (AngelList)</div>
+              <div class="sub">Startup-specific job board. Many accelerators and VC-backed companies post here. Filter by stage and role.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+          <a class="resource-item" href="https://startup.jobs" target="_blank">
+            <span class="icon">🎯</span>
+            <div class="info">
+              <div class="title">Startup.jobs</div>
+              <div class="sub">Focused specifically on startup ecosystem roles — operations, partnerships, community, program management.</div>
+            </div>
+            <span class="arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <footer>
+    <p>Built for someone who's about to become a force in the SF startup ecosystem. Start with one project, share it publicly, and let the work speak.</p>
+    <p style="margin-top: 8px; color: #4a5066;">Last updated: May 2025</p>
+  </footer>
+
+</body>
+</html>
